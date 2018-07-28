@@ -1,1 +1,5 @@
 venv/
+instance/
+*.pyc
+.installed.cfgg
+__pycache__/
