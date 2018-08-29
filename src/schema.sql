@@ -2,14 +2,14 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS room;
 DROP TABLE IF EXISTS room_user;
 
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS user (
     id INTEGER AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE room (
+CREATE TABLE IF NOT EXISTS room (
     id INTEGER AUTOINCREMENT,
     creator_id INTEGER NOT NULL
     name TEXT NOT NULL,
@@ -18,11 +18,12 @@ CREATE TABLE room (
     FOREIGN KEY (creator_id) REFERENCES user (id)
 );
 
-CREATE TABLE room_user (
+CREATE TABLE IF NOT EXISTS room_user (
     room_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
-    PRIMARY KEY (room_id, user_id)
+    PRIMARY KEY (room_id, user_id),
+    FOREIGN KEY (room_id) REFERENCES room (id),
+    FOREIGN KEY (user_id) REFERENCES user (id)
 );
-
 
 
